@@ -1,0 +1,29 @@
+﻿@page "/chat"
+@using customCopilot.Services
+@inject IMemoryService MemoryService
+
+<PageTitle>Chat</PageTitle>
+
+<p>
+    Type your question:
+</p>
+<p>
+    <input @bind="question" style="width: 100%;" />
+</p>
+<p>
+    <button class="btn btn-primary" @onclick="Ask">Ask</button>
+</p>
+<p>
+    <strong>The answer is:</strong> @answer
+</p>
+
+@code {
+    private string question;
+    private string answer;
+
+    private async Task Ask()
+    {
+        answer = await MemoryService.AskQuestion(question);
+
+    }
+}
